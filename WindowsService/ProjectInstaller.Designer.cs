@@ -1,5 +1,5 @@
 ﻿
-namespace MonitoringProducer
+namespace MonitoringConsumer
 {
     partial class ProjectInstaller
     {
@@ -29,32 +29,33 @@ namespace MonitoringProducer
         /// </summary>
         private void InitializeComponent()
         {
-            this.serviceProcessInstaller = new System.ServiceProcess.ServiceProcessInstaller();
-            this.serviceInstaller = new System.ServiceProcess.ServiceInstaller();
+            this.serviceProcessInstaller2 = new System.ServiceProcess.ServiceProcessInstaller();
+            this.serviceInstaller2 = new System.ServiceProcess.ServiceInstaller();
             // 
-            // serviceProcessInstaller
+            // serviceProcessInstaller2
             // 
-            this.serviceProcessInstaller.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
-            this.serviceProcessInstaller.Password = null;
-            this.serviceProcessInstaller.Username = null;
-            this.serviceProcessInstaller.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceProcessInstaller1_AfterInstall);
+            this.serviceProcessInstaller2.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
+            this.serviceProcessInstaller2.Password = null;
+            this.serviceProcessInstaller2.Username = null;
+            this.serviceProcessInstaller2.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceProcessInstaller1_AfterInstall);
             // 
-            // serviceInstaller
+            // serviceInstaller2
             // 
-            this.serviceInstaller.ServiceName = "MonitoringProducer";
-            this.serviceInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            this.serviceInstaller2.DisplayName = "MonitoringConsumer";
+            this.serviceInstaller2.ServiceName = "MonitoringConsumer";
+            this.serviceInstaller2.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller
             // 
             this.Installers.AddRange(new System.Configuration.Install.Installer[] {
-            this.serviceProcessInstaller,
-            this.serviceInstaller});
+            this.serviceProcessInstaller2,
+            this.serviceInstaller2});
 
         }
 
         #endregion
 
-        private System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller;
-        private System.ServiceProcess.ServiceInstaller serviceInstaller;
+        private System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller2;
+        private System.ServiceProcess.ServiceInstaller serviceInstaller2;
     }
 }

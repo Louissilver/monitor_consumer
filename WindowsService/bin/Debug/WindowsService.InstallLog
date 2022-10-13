@@ -643,3 +643,48 @@ Parâmetros afetados são:
    logfile = C:\Projetos\wservice\WindowsService\WindowsService\bin\Debug\WindowsService.InstallLog
    assemblypath = C:\Projetos\wservice\WindowsService\WindowsService\bin\Debug\WindowsService.exe
    logtoconsole = 
+Instalando o assembly 'C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe'.
+Parâmetros afetados são:
+   i = 
+   logfile = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Instalando o serviço MonitoringProducer...
+Criando a origem de EventLog MonitoringProducer no log Application...
+Revertendo o assembly 'C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe'.
+Parâmetros afetados são:
+   i = 
+   logfile = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Restaurando o log de eventos para o estado anterior da origem MonitoringProducer.
+Instalando o assembly 'C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe'.
+Parâmetros afetados são:
+   i = 
+   logfile = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Instalando o serviço MonitoringProducer...
+Criando a origem de EventLog MonitoringProducer no log Application...
+Revertendo o assembly 'C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe'.
+Parâmetros afetados são:
+   i = 
+   logfile = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Restaurando o log de eventos para o estado anterior da origem MonitoringProducer.
+Instalando o assembly 'C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe'.
+Parâmetros afetados são:
+   i = 
+   logfile = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Instalando o serviço MonitoringProducer...
+Criando a origem de EventLog MonitoringProducer no log Application...
+Revertendo o assembly 'C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe'.
+Parâmetros afetados são:
+   i = 
+   logfile = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Restaurando o log de eventos para o estado anterior da origem MonitoringProducer.

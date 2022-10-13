@@ -1,5 +1,5 @@
 ﻿
-namespace MonitoringProducer
+namespace MonitoringConsumer
 {
     partial class Service
     {
