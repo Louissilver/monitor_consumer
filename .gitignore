@@ -3,6 +3,20 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+[Oo]bj
+[Bb]in
+*.user
+*.suo
+*.[Cc]ache
+*.bak
+*.ncb
+*.log 
+*.DS_Store
+[Tt]humbs.db 
+_ReSharper.*
+*.resharper
+Ankh.NoLoad
+
 # User-specific files
 *.rsuser
 *.suo
