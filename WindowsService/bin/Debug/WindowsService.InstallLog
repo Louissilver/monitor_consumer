@@ -688,3 +688,48 @@ Parâmetros afetados são:
    assemblypath = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe
    logtoconsole = 
 Restaurando o log de eventos para o estado anterior da origem MonitoringProducer.
+Desinstalando o assembly 'C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe'.
+Parâmetros afetados são:
+   logtoconsole = 
+   logfile = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe
+Removendo a origem do EventLog MonitoringProducer.
+Serviço MonitoringProducer está sendo removido do sistema...
+Serviço MonitoringProducer foi removido com êxito do sistema.
+Desinstalando o assembly 'C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe'.
+Parâmetros afetados são:
+   logtoconsole = 
+   logfile = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe
+Removendo a origem do EventLog MonitoringProducer.
+Aviso: a origem MonitoringProducer não está registrada no computador local.
+Serviço MonitoringProducer está sendo removido do sistema...
+Ocorreu uma exceção durante a desinstalação do instalador System.ServiceProcess.ServiceInstaller.
+System.ComponentModel.Win32Exception: O serviço especificado não existe como serviço instalado
+Ocorreu uma exceção ao desinstalar. Essa exceção será ignorada e a desinstalação continuará. Mas talvez o aplicativo não seja totalmente desinstalado após a conclusão da desinstalação.
+Instalando o assembly 'C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe'.
+Parâmetros afetados são:
+   i = 
+   logfile = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Instalando o serviço MonitoringProducer...
+Serviço MonitoringProducer foi instalado com êxito.
+Criando a origem de EventLog MonitoringProducer no log Application...
+Confirmando o assembly 'C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe'.
+Parâmetros afetados são:
+   i = 
+   logfile = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Desinstalando o assembly 'C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe'.
+Parâmetros afetados são:
+   logtoconsole = 
+   logfile = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Projetos\wservice\WindowsService2\WindowsService\bin\Debug\WindowsService.exe
+Removendo a origem do EventLog MonitoringProducer.
+Aviso: a origem MonitoringProducer não está registrada no computador local.
+Serviço MonitoringProducer está sendo removido do sistema...
+Ocorreu uma exceção durante a desinstalação do instalador System.ServiceProcess.ServiceInstaller.
+System.ComponentModel.Win32Exception: O serviço especificado não existe como serviço instalado
+Ocorreu uma exceção ao desinstalar. Essa exceção será ignorada e a desinstalação continuará. Mas talvez o aplicativo não seja totalmente desinstalado após a conclusão da desinstalação.

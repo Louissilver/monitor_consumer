@@ -15,5 +15,10 @@ namespace MonitoringConsumer
         {
 
         }
+
+        private void serviceInstaller2_AfterInstall(object sender, InstallEventArgs e)
+        {
+
+        }
     }
 }

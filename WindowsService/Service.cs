@@ -13,6 +13,7 @@ using System.Net.Sockets;
 using RabbitMQ.Client.Events;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace MonitoringConsumer
 {
@@ -37,17 +38,9 @@ namespace MonitoringConsumer
 
         public void Working()
         {
-            int idMessage = 0;
-            Console.WriteLine("Aguardando novas mensagens.\n\n");
             while (true)
             {
-                string cs = @"server=localhost;port=3306;userid=root;password=Kcto201933!!;database=sistdist";
-                var con = new MySqlConnection(cs);
-                con.Open();
-
-                var cmd = new MySqlCommand();
-                cmd.Connection = con;
-
+                List<PayloadMaquina> macAddressPayload = new List<PayloadMaquina>();
                 var factory = new ConnectionFactory() { HostName = "localhost" };
                 using (var connection = factory.CreateConnection())
                 using (var channel = connection.CreateModel())
@@ -57,23 +50,76 @@ namespace MonitoringConsumer
                                          exclusive: false,
                                          autoDelete: false,
                                          arguments: null);
-
                     var consumer = new EventingBasicConsumer(channel);
                     consumer.Received += (model, ea) =>
                     {
                         var body = ea.Body.ToArray();
                         var message = Encoding.UTF8.GetString(body);
 
-                        PayloadMaquina weatherForecast =
+                        PayloadMaquina payload =
                          JsonConvert.DeserializeObject<PayloadMaquina>(message);
-
-                        cmd.CommandText = $"INSERT INTO maquina (macAddress, ipv4, hostname, datahora, local) VALUES(\"{ weatherForecast?.macAddress}\", \"{ weatherForecast?.ipv4}\", \"{ weatherForecast?.hostname}\", \"{weatherForecast?.DataHoraMensagem}\", \"{ weatherForecast?.local}\");";
-                        cmd.ExecuteNonQuery();
-                        idMessage += 1;
+                        macAddressPayload.Add(payload);
                     };
                     channel.BasicConsume(queue: "hello",
                                          autoAck: true,
                                          consumer: consumer);
+                }
+
+                string cs = @"server=localhost;port=3306;userid=root;password=Kcto201933!!;database=sistdist";
+                var con = new MySqlConnection(cs);
+                con.Open();
+
+                foreach (var a in macAddressPayload)
+                {
+                    var sql = $"SELECT COUNT(id) FROM horarios WHERE macAddress = \"{a.macAddress}\"";
+                    var cmd = new MySqlCommand(sql, con);
+                    MySqlDataReader rdr = cmd.ExecuteReader();
+                    rdr.Read();
+
+                    if (rdr.GetInt32(0) == 0)
+                    {
+                        rdr.Close();
+                        cmd = new MySqlCommand();
+                        cmd.Connection = con;
+                        cmd.CommandText = $"INSERT INTO horarios (macAddress, hora_inicial, hora_final, data) VALUES (\"{a.macAddress}\", \"{a.hora}\", \"{DateTime.Now.ToString("HH:mm:ss")}\", \"{a.data}\"); INSERT INTO computadores (macAddress, ipv4, hostname, local) VALUES (\"{a.macAddress}\", \"{a.ipv4}\", \"{a.hostname}\", \"{a.local}\");";
+                        cmd.ExecuteNonQuery();
+
+                    }
+                    else
+                    {
+                        rdr.Close();
+                        sql = $"SELECT hora_final FROM horarios WHERE macAddress = \"{a.macAddress}\" AND data = CURDATE() ORDER BY id DESC LIMIT 1";
+                        cmd = new MySqlCommand(sql, con);
+                        rdr = cmd.ExecuteReader();
+                        if (rdr.Read())
+                        {
+                            if (DateTime.Parse(rdr.GetString(0)).AddMinutes(10) < DateTime.Now || rdr.GetString(0) == "")
+                            {
+                                rdr.Close();
+                                cmd = new MySqlCommand();
+                                cmd.Connection = con;
+                                cmd.CommandText = $"INSERT INTO horarios (macAddress, hora_inicial, hora_final, data) VALUES (\"{a.macAddress}\", \"{a.hora}\", \"{DateTime.Now.ToString("HH:mm:ss")}\", \"{a.data}\")";
+                                cmd.ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                rdr.Close();
+                                cmd = new MySqlCommand();
+                                cmd.Connection = con;
+                                cmd.CommandText = $"UPDATE horarios SET hora_final = \"{a.hora}\" WHERE macAddress = '{a.macAddress}' AND data = CURDATE() ORDER BY id DESC LIMIT 1";
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+                        else
+                        {
+                            rdr.Close();
+                            cmd = new MySqlCommand();
+                            cmd.Connection = con;
+                            cmd.CommandText = $"INSERT INTO horarios (macAddress, hora_inicial, hora_final, data) VALUES (\"{a.macAddress}\", \"{a.hora}\", \"{DateTime.Now.ToString("HH:mm:ss")}\", \"{a.data}\")";
+                            cmd.ExecuteNonQuery();
+                        }
+
+                    }
                 }
                 Thread.Sleep(ScheduleTime * 60 * 1000);
             }
@@ -92,7 +138,8 @@ namespace MonitoringConsumer
             public string macAddress { get; set; }
             public string ipv4 { get; set; }
             public string hostname { get; set; }
-            public string DataHoraMensagem { get; set; }
+            public string data { get; set; }
+            public string hora { get; set; }
             public string local { get; set; }
         }
     }
