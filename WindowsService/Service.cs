@@ -1,15 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Data;
-using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 using System.Configuration;
 using System.Threading;
 using RabbitMQ.Client;
-using System.Net.NetworkInformation;
-using System.Net;
-using System.Net.Sockets;
 using RabbitMQ.Client.Events;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
@@ -21,6 +16,7 @@ namespace MonitoringConsumer
     public partial class Service : ServiceBase
     {
         readonly int ScheduleTime = Convert.ToInt32(ConfigurationManager.AppSettings["ThreadTime"]);
+        readonly string ConnectionString = ConfigurationManager.AppSettings["ConnectionString"];
 
         private Thread Worker = null;
 
@@ -45,7 +41,7 @@ namespace MonitoringConsumer
                 using (var connection = factory.CreateConnection())
                 using (var channel = connection.CreateModel())
                 {
-                    channel.QueueDeclare(queue: "hello",
+                    channel.QueueDeclare(queue: "monitor",
                                          durable: false,
                                          exclusive: false,
                                          autoDelete: false,
@@ -60,18 +56,17 @@ namespace MonitoringConsumer
                          JsonConvert.DeserializeObject<PayloadMaquina>(message);
                         macAddressPayload.Add(payload);
                     };
-                    channel.BasicConsume(queue: "hello",
+                    channel.BasicConsume(queue: "monitor",
                                          autoAck: true,
                                          consumer: consumer);
                 }
 
-                string cs = @"server=localhost;port=3306;userid=root;password=Kcto201933!!;database=sistdist";
-                var con = new MySqlConnection(cs);
+                var con = new MySqlConnection(ConnectionString);
                 con.Open();
 
                 foreach (var a in macAddressPayload)
                 {
-                    var sql = $"SELECT COUNT(id) FROM horarios WHERE macAddress = \"{a.macAddress}\"";
+                    var sql = $"SELECT COUNT(id) FROM horarios WHERE macAddress = \"{a.macAddress}\" AND data = CURDATE()";
                     var cmd = new MySqlCommand(sql, con);
                     MySqlDataReader rdr = cmd.ExecuteReader();
                     rdr.Read();
